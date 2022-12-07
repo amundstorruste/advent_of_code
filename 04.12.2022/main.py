@@ -12,3 +12,17 @@ with open('puzzle_input') as f:
         if section_3 <= section_1 and section_2 <= section_4:
             count_fully_contained += 1
     print(count_fully_contained)
+
+with open('puzzle_input') as f:
+    lines = f.readlines()
+    count_partially_contained = 0
+    for line in lines:
+        assignments = line.rstrip().split(",")
+        section_1, section_2 = map(int, assignments[0].split("-"))
+        section_3, section_4 = map(int, assignments[1].split("-"))
+        if section_1 <= section_3 and section_3 <= section_2:
+            count_partially_contained += 1
+            continue
+        if section_3 <= section_1 and section_1 <= section_4:
+            count_partially_contained += 1
+    print(count_partially_contained)

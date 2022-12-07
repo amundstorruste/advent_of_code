@@ -25,3 +25,21 @@ with open('puzzle_input.txt') as f:
         crate_stacks = update_stacks(crate_stacks, instruction)
     top_of_stack = [stack[-1] for stack in crate_stacks]
     print("".join(top_of_stack))
+
+
+def CrateMover_9001(crate_stacks, instruction):
+    number_of_crates, from_crate, to_crate = [int(s) for s in instruction.split() if s.isdigit()]
+    lift_up = crate_stacks[from_crate-1][-number_of_crates:]
+    crate_stacks[from_crate-1] = crate_stacks[from_crate-1][:-number_of_crates]
+    crate_stacks[to_crate-1].extend(lift_up)
+    return crate_stacks
+
+
+with open('puzzle_input.txt') as f:
+    lines = f.readlines()
+    crate_stacks = make_crate_stacks(lines[:8])
+    instructions = lines[10:]
+    for instruction in instructions:
+        crate_stacks = CrateMover_9001(crate_stacks, instruction)
+    top_of_stack = [stack[-1] for stack in crate_stacks]
+    print("".join(top_of_stack))

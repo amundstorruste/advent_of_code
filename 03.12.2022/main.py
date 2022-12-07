@@ -17,3 +17,23 @@ with open('puzzle_input') as f:
         priority_list.append(value)
     print(sum(priority_list))
 
+with open('puzzle_input') as f:
+    lines = f.readlines()
+    badges = []
+    squad_list = ["","",""]
+
+    for i, line in enumerate(lines):
+        rucksack = line.rstrip()
+
+        squad_number = i % 3
+        squad_list[squad_number] = rucksack
+        
+        if squad_number == 2:
+            set_0 = set(squad_list[0])
+            set_1 = set(squad_list[1])
+            set_2 = set(squad_list[2])
+            badge = set_0 & set_1 & set_2 
+            badges.append("".join(badge))
+
+    values = [convert_char_to_val(badge) for badge in badges]
+    print(sum(values))
